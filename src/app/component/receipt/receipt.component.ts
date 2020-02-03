@@ -36,21 +36,23 @@ export class ReceiptComponent implements OnInit {
         totalPrice += itemPrice;
 
         const types = item.type.split(',');
-        let count =0;
+        let exemptHandled = false;
 
         types.forEach( (type) => { 
 
           console.log(type);
-          if (count === 0 && !(this.taxExemptTypes.includes(type))) {
+          if (exemptHandled === false && !(this.taxExemptTypes.includes(type))) {
             console.log(item.name + '1' + tax);
             tax = 0.1 * itemPrice;   
+          }
+          else {
+            exemptHandled = true;
           }
 
           if (type === ItemTypes.Imported) {
             tax += (0.05 * itemPrice);
             console.log(item.name + '2' + tax);
           }
-          count++;
         });
 
         item.price = formatPrice(itemPrice + tax);
