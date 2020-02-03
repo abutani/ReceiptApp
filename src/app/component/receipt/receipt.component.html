@@ -1,0 +1,13 @@
+<div>
+    <button (click)="generateReceipts()">
+        Generate Receipts
+    </button>
+</div>
+<div *ngFor="let receipt of receipts">
+    <div *ngFor="let item of receipt.basket.items">
+        <div>{{ item.quantity }} {{ item.name }} at {{ item.price }}</div>
+    </div>
+    <div>Sales Tax: {{ receipt.salesTax }}</div>
+    <div>Total: {{ receipt.total }}</div>
+    <br/>
+<div>
